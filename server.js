@@ -1,21 +1,23 @@
 'use strict';
 var http = require('http');
-var port = process.env.PORT || 1337;
-
-var MongoClient = require('mongodb').MongoClient;
-//var assert = require('assert');
-//var ObjectId = require('mongodb').ObjectID;
-//var url = 'mongodb://cosmosace:u1Jdn9vibrTgQo3hvbTTCnKoIr9BB3qLpT91Z8Vt9WpC1lQigxyNfkntjtyA71MaMXcNuToDZwsHqw4YyCFQ2w%3D%3D@cosmosace.mongo.cosmos.azure.com:10255/?ssl=true&appName=@cosmosace@';
+var dt = require('./myfirstmodule');
+var fs = require('fs');
+//var mongo = require('mongodb');
 
 http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello World\n');
-}).listen(port);
+    
+    fs.readFile('./demofile1.html', function (err, data) {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write(data);
+
+    });
+    res.write("The date and time are currently: " + dt.myDateTime());
+    res.write("</body>\n</html>");
+    res.end();
+}).listen(1337);
 
 //Modu³y:
-exports.myDateTime = function () {
-    return Date();
-};
+
 
 /*
 
