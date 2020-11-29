@@ -11,9 +11,6 @@ http.createServer(function (req, res) {
         res.write(data);
         return res.end();
     });
-    //res.writeHead(200, { 'Content-Type': 'text/html' });
-    //res.write(" ");
-    //res.end();
 }).listen(1337);
 
 //Modu³y:
