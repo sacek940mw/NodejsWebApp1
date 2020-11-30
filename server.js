@@ -1,6 +1,6 @@
-'use strict';
+//'use strict';
 var http = require('http');
-var dt = require('./myfirstmodule');
+//var dt = require('./myfirstmodule');
 var fs = require('fs');
 //var mongo = require('mongodb');
 
