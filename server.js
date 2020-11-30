@@ -7,7 +7,7 @@ var mongo = require('mongodb');
 http.createServer(function (req, res) {
 
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write("<html>\n<body>");
+    res.write("<html>\n<body>\n");
 
     res.write("</body>\n</html>");
     return res.end();
