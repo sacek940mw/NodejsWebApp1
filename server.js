@@ -1,5 +1,6 @@
-//'use strict';
+'use strict';
 var http = require('http');
+const port = process.env.PORT || 1337
 //var dt = require('./myfirstmodule');
 var fs = require('fs');
 //var mongo = require('mongodb');
@@ -12,4 +13,4 @@ http.createServer(function (req, res) {
     res.write("</body>\n</html>");
     return res.end();
        
-}).listen(1337);
+}).listen(port);
