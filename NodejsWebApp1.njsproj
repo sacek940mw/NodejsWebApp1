@@ -28,12 +28,6 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="demofile1.html">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="myfirstmodule.js">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
