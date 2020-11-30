@@ -2,7 +2,7 @@
 var http = require('http');
 var dt = require('./myfirstmodule');
 var fs = require('fs');
-var mongo = require('mongodb');
+//var mongo = require('mongodb');
 
 http.createServer(function (req, res) {
 
