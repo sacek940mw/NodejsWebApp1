@@ -25,8 +25,6 @@ exports.stwSer = function () {
                             parse(body)
                         );
                         waited = mon.dodajHaslo(parse(body));
-                        delete require.cache[require.resolve(stwSer)];
-                        return require(stwSer);
                         //close();
                     });
                 } else {
