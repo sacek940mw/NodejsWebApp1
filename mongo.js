@@ -2,7 +2,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://cosmosace:u1Jdn9vibrTgQo3hvbTTCnKoIr9BB3qLpT91Z8Vt9WpC1lQigxyNfkntjtyA71MaMXcNuToDZwsHqw4YyCFQ2w%3D%3D@cosmosace.mongo.cosmos.azure.com:10255/?ssl=true&appName=@cosmosace@";
 //var Promise = require('rsvp').Promise;
 
-exports.dodajHaslo = function (myobj, callback) {
+exports.dodajHaslo = function (myobj) {
     return new Promise(function (resolve, reject) {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
@@ -12,7 +12,7 @@ exports.dodajHaslo = function (myobj, callback) {
                 if (err) throw err;
                 console.log("1 document inserted");
                 db.close();
-                resolve("1 document inserted");
+                resolve("Has³o dodane");
             });
         });
     });

@@ -10,4 +10,6 @@ const { parse } = require('querystring');
 
 var hasla = [];
 
-var serwer = stron.stwSer();
+//var serwer = stron.stwSer();
+var serwer = stron.newSer();
+
