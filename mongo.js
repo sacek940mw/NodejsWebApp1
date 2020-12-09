@@ -18,14 +18,52 @@ exports.dodajHaslo = function (myobj) {
     });
 };
 
+exports.edytujHaslo = function (edyt, myobj) {
+    console.log("edyt.strona: "+edyt.strona);
+    //console.log("myobj: "+myobj);
+    return new Promise(function (resolve, reject) {
+        MongoClient.connect(url, function (err, db) {
+            if (err) throw err;
+            var dbo = db.db("strona");
+            //var query = { '_id': ID };
+
+            var query = { strona: edyt.strona, login: edyt.login, haslo: edyt.haslo };
+            var newvalues = { $set: myobj };
+            dbo.collection("Hasla").updateOne(query, newvalues, function (err, res) {
+                if (err) throw err;
+                console.log(res);
+                db.close();
+                resolve("Has³o zaktualizowane");
+            });
+        });
+    });
+};
+
 exports.znajdzHasla = function () {
     return new Promise(function (resolve, reject) {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db('strona');
-            dbo.collection("Hasla").find({}).toArray(function (err, result) {
+            dbo.collection("Hasla").find({}, { projection: { _id: 1, strona: 1, login: 1, haslo: 1 } }).toArray(function (err, result) {
                 if (err) throw err;
-                //console.log(result[1]);
+                //console.log(result[0]._id);
+                db.close();
+                resolve(result);
+            });
+        });
+    });
+};
+
+exports.znajdzHasloPoID = function (ID) {
+    return new Promise(function (resolve, reject) {
+        MongoClient.connect(url, function (err, db) {
+            console.log("ID: " + ID);
+            if (err) throw err;
+            var dbo = db.db("strona");
+            var query = { _id: ID };
+            dbo.collection("Hasla").find(query).toArray(function (err, result) {
+                if (err) throw err;
+                console.log(result);
                 db.close();
                 resolve(result);
             });
