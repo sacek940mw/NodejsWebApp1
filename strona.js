@@ -4,8 +4,8 @@ const port = process.env.PORT || 1337
 var fs = require('fs');
 const mon = require('./mongo');
 const { parse } = require('querystring');
-//var host = "https://mongoapka.azurewebsites.net";
-var host = "http://localhost:1337";
+var host = "https://mongoapka.azurewebsites.net";
+//var host = "http://localhost:1337";
 
 var hasla = [];
 //var edytowany = { strona: "", login: "", haslo: "" };
@@ -206,7 +206,34 @@ exports.newSer = function () {
                 return res.end("404 Not Found")
             }
         } else {
-
+            res.write(`
+                <!doctype html>
+                <html>
+                <head>
+                    <meta charset="utf-8">
+                    <title>PASSWORD MANAGER</title>
+                </head>
+                <body>            
+                    <h1 align="center">Edit password:</h1> 
+                    <div class="eForm" align="center">
+                        <form align=\"center\" action="`+ host + `/editPassword_` + pathname[1] + `" method="post">
+                            <label for="strona">Page:</label><br>
+                            <input type="text" name="strona" value="` + value[0].strona + `"><br>
+                            <label for="login">Login:</label><br>
+                            <input type="text" name="login" value="` + value[0].login + `"><br>
+                            <label for="haslo">Password:</label><br>
+                            <input type="text" name="haslo" value="` + value[0].haslo + `"><br>
+                            <button>Edit</button><br>
+                        </form>
+                    </div>
+                    <div class="guzik" align="center">
+                        <h1 align="center" >------------------</h1> 
+                        <button onclick="window.location.href='`+ host + `/deletePassword_` + pathname[1] + `'">Delete data</button>
+                        <br>
+                    </div> 
+                </body>
+                </html>
+                `);
         }
         
     }).listen(port);
