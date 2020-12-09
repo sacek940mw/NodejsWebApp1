@@ -12,7 +12,7 @@ exports.dodajHaslo = function (myobj) {
                 if (err) throw err;
                 //console.log("1 document inserted");
                 db.close();
-                resolve("Has³o dodane");
+                resolve("Password added");
             });
         });
     });
@@ -33,7 +33,7 @@ exports.edytujHaslo = function (edyt, myobj) {
                 if (err) throw err;
                 //console.log(res);
                 db.close();
-                resolve("Has³o zaktualizowane");
+                resolve("Password updated");
             });
         });
     });
@@ -79,7 +79,7 @@ exports.usunHaslo = function (ID) {
             dbo.collection("Hasla").deleteOne(query, function (err, obj) {
                 if (err) throw err;
                 db.close();
-                resolve("Dane usuniête");
+                resolve("Data deleted");
             });
         });
     });
