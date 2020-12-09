@@ -4,8 +4,8 @@ const port = process.env.PORT || 1337
 var fs = require('fs');
 const mon = require('./mongo');
 const { parse } = require('querystring');
-var host = "https://mongoapka.azurewebsites.net";
-//var host = "http://localhost:1337";
+//var host = "https://mongoapka.azurewebsites.net";
+var host = "http://localhost:1337";
 
 var hasla = [];
 //var edytowany = { strona: "", login: "", haslo: "" };
@@ -206,27 +206,7 @@ exports.newSer = function () {
                 return res.end("404 Not Found")
             }
         } else {
-            res.write(`
-                <!doctype html>
-                <html>
-                <head>
-                    <meta charset="utf-8">
-                    <title>PASSWORD MANAGER</title>
-                </head>
-                <body>            
-                    <h1 align="center">Enter password to login</h1> 
-                    <div class="eForm" align="center">
-                        <form align=\"center\" action="`+ host + `/login` + `" method="post">
-                            <label for="strona">Password:</label><br>
-                            <input type="text" name="strona"><br>
-                            <button>Edit</button><br>
-                        </form>
-                    </div>
-                </body>
-                </html>
-                `);
-            res.end();
-        });
+
         }
         
     }).listen(port);

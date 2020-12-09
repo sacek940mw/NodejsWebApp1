@@ -79,7 +79,7 @@ exports.usunHaslo = function (ID) {
             dbo.collection("Hasla").deleteOne(query, function (err, obj) {
                 if (err) throw err;
                 db.close();
-                resolve("Data deleted"); 
+                resolve("Data deleted");
             });
         });
     });
