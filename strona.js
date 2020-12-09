@@ -4,19 +4,19 @@ const port = process.env.PORT || 1337
 var fs = require('fs');
 const mon = require('./mongo');
 const { parse } = require('querystring');
-var host = "https://mongoapka.azurewebsites.net";
-//var host = "http://localhost:1337";
+//var host = "https://mongoapka.azurewebsites.net";
+var host = "http://localhost:1337";
 
 var hasla = [];
 //var edytowany = { strona: "", login: "", haslo: "" };
 var edytowany;
-var logged = true;
+var logged = "TRUE";
 
 
 exports.newSer = function () {
     var serwer = http.createServer(function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        if (logged == true) {
+        if (logged == "TRUE") {
             var q = url.parse(req.url, true);
             var pathname = q.pathname.split('_');
             if (q.pathname == "/" || q.pathname == "/index.html") {
@@ -206,7 +206,20 @@ exports.newSer = function () {
                 return res.end("404 Not Found")
             }
         } else {
-            res.write(`
+            if (req.method === 'POST') {
+                let body = '';
+                req.on('data', chunk => {
+                    body += chunk.toString();
+                });
+                waited = req.on('end', () => {
+                    var wyn = mon.zaaloguj();
+                    waited = wyn.then((value) => {
+                        logged = value[0];
+                        res.end("zal")
+                    });
+                });
+            }
+            res.end(`
                 <!doctype html>
                 <html>
                 <head>
@@ -214,23 +227,14 @@ exports.newSer = function () {
                     <title>PASSWORD MANAGER</title>
                 </head>
                 <body>            
-                    <h1 align="center">Edit password:</h1> 
+                    <h1 align="center">Enter password to login:</h1> 
                     <div class="eForm" align="center">
-                        <form align=\"center\" action="`+ host + `/editPassword_` + pathname[1] + `" method="post">
-                            <label for="strona">Page:</label><br>
-                            <input type="text" name="strona" value="` + value[0].strona + `"><br>
-                            <label for="login">Login:</label><br>
-                            <input type="text" name="login" value="` + value[0].login + `"><br>
-                            <label for="haslo">Password:</label><br>
-                            <input type="text" name="haslo" value="` + value[0].haslo + `"><br>
-                            <button>Edit</button><br>
+                        <form align=\"center\" action="`+ host + `/login" method="post">
+                            <label for="strona">Password:</label><br>
+                            <input type="text" name="strona"><br>
+                            <button>Enter</button><br>
                         </form>
                     </div>
-                    <div class="guzik" align="center">
-                        <h1 align="center" >------------------</h1> 
-                        <button onclick="window.location.href='`+ host + `/deletePassword_` + pathname[1] + `'">Delete data</button>
-                        <br>
-                    </div> 
                 </body>
                 </html>
                 `);
