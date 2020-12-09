@@ -10,7 +10,7 @@ exports.dodajHaslo = function (myobj) {
             //var myobj = { name: "Company Inc", address: "Highway 37" };
             dbo.collection("Hasla").insertOne(myobj, function (err, res) {
                 if (err) throw err;
-                console.log("1 document inserted");
+                //console.log("1 document inserted");
                 db.close();
                 resolve("Has³o dodane");
             });
@@ -31,7 +31,7 @@ exports.edytujHaslo = function (edyt, myobj) {
             var newvalues = { $set: myobj };
             dbo.collection("Hasla").updateOne(query, newvalues, function (err, res) {
                 if (err) throw err;
-                console.log(res);
+                //console.log(res);
                 db.close();
                 resolve("Has³o zaktualizowane");
             });
@@ -57,15 +57,29 @@ exports.znajdzHasla = function () {
 exports.znajdzHasloPoID = function (ID) {
     return new Promise(function (resolve, reject) {
         MongoClient.connect(url, function (err, db) {
-            console.log("ID: " + ID);
             if (err) throw err;
             var dbo = db.db("strona");
             var query = { _id: ID };
             dbo.collection("Hasla").find(query).toArray(function (err, result) {
                 if (err) throw err;
-                console.log(result);
+                //console.log(result);
                 db.close();
                 resolve(result);
+            });
+        });
+    });
+};
+
+exports.usunHaslo = function (ID) {
+    return new Promise(function (resolve, reject) {
+        MongoClient.connect(url, function (err, db) {
+            if (err) throw err;
+            var dbo = db.db("strona");
+            var query = { _id: ID };
+            dbo.collection("Hasla").deleteOne(query, function (err, obj) {
+                if (err) throw err;
+                db.close();
+                resolve("Dane usuniête");
             });
         });
     });
