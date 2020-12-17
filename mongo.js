@@ -84,24 +84,3 @@ exports.usunHaslo = function (ID) {
         });
     });
 };
-
-exports.zaaloguj = function (pass) {
-    console.log(result);
-    /*
-    return new Promise(function (resolve, reject) {
-        MongoClient.connect(url, function (err, db) {
-            if (err) throw err;
-            var dbo = db.db("strona");
-            dbo.collection(pass).findOne({}, function (err, result) {
-                if (err) {
-                    db.close();
-                    resolve(err);
-                } else {
-                    db.close();
-                    resolve("TRUE");
-                }                
-            });
-        });
-    });
-    */
-};

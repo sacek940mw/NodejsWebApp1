@@ -8,7 +8,6 @@ var host = "https://mongoapka.azurewebsites.net";
 //var host = "http://localhost:1337";
 
 var hasla = [];
-//var edytowany = { strona: "", login: "", haslo: "" };
 var edytowany;
 var logged = "TRUE";
 
@@ -170,7 +169,7 @@ exports.newSer = function () {
                 var prom = mon.znajdzHasloPoID(pathname[1]);
                 var waited = prom.then((value) => {
                     edytowany = value[0];
-                    //console.log("Edytowany: " + value[0]);
+                    console.log("Edytowany: " + value[0].strona);
                     res.write(`
                 <!doctype html>
                 <html>
